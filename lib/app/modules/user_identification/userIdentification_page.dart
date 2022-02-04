@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, file_names
 
 import 'package:em_cartaz/app/core/themes/app_colors.dart';
 import 'package:em_cartaz/app/core/themes/app_styles.dart';
@@ -20,8 +20,6 @@ class UserIdentificationPageState
     extends ModularState<UserIdentificationPage, UserIdentificationStore> {
   @override
   Widget build(BuildContext context) {
-    final screen = MediaQuery.of(context).size;
-
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(

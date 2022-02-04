@@ -1,4 +1,5 @@
-import 'package:em_cartaz/app/modules/user_identification/user_identification_store.dart';
+// ignore_for_file: file_names
+
 import 'package:flutter_modular/flutter_modular.dart';
 
 class UserIdentificationModule extends Module {
