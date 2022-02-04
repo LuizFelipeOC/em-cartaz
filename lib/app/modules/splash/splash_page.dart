@@ -24,7 +24,7 @@ class SplashPageState extends State<SplashPage> {
     Future.delayed(
       const Duration(seconds: 4),
       () {
-        Modular.to.navigate('/user/identification');
+        Modular.to.navigate('/initialConfig');
       },
     );
 
