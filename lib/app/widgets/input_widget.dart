@@ -10,27 +10,29 @@ class InputWidget extends StatelessWidget {
     this.title,
     this.onChange,
     this.inputAction,
+    this.error,
   }) : super(key: key);
 
   final String? title;
   final Function(String? value)? onChange;
   final TextInputAction? inputAction;
+  final String? error;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       style: AppStyles.heading,
       decoration: InputDecoration(
-        border: OutlineInputBorder(),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.darkGradientSecond),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.darkGradientSecond),
-        ),
-        labelText: title,
-        labelStyle: AppStyles.heading,
-      ),
+          border: OutlineInputBorder(),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.darkGradientSecond),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.darkGradientSecond),
+          ),
+          labelText: title,
+          labelStyle: AppStyles.heading,
+          errorText: error),
       cursorColor: AppColors.darkGradientSecond,
       onChanged: onChange,
       textInputAction: inputAction ?? TextInputAction.unspecified,
