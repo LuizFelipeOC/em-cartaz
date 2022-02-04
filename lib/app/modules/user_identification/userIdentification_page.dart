@@ -2,6 +2,8 @@
 
 import 'package:em_cartaz/app/core/themes/app_colors.dart';
 import 'package:em_cartaz/app/core/themes/app_styles.dart';
+import 'package:em_cartaz/app/widgets/button_widget.dart';
+import 'package:em_cartaz/app/widgets/input_widget.dart';
 import 'package:flutter/material.dart';
 
 class UserIdentificationPage extends StatefulWidget {
@@ -32,6 +34,7 @@ class UserIdentificationPageState extends State<UserIdentificationPage> {
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: Card(
+              elevation: 100,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -41,6 +44,39 @@ class UserIdentificationPageState extends State<UserIdentificationPage> {
                     child: Text(
                       'Para uma melhor experiência, vamos a uma configuração inicial!',
                       style: AppStyles.heading,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                    ),
+                    child: Column(
+                      children: [
+                        InputWidget(
+                          title: 'Nome',
+                        ),
+                        SizedBox(height: 10),
+                        InputWidget(
+                          title: 'Sigla UF',
+                        ),
+                        Container(
+                          margin: EdgeInsetsDirectional.only(
+                            top: 5,
+                            bottom: 20,
+                          ),
+                          height: 56,
+                          child: ButtonWidget(
+                            title: Text(
+                              'Salvar',
+                              style: AppStyles.buttonText,
+                            ),
+                            submit: () => {
+                              FocusScope.of(context).unfocus(),
+                            },
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 ],
