@@ -6,6 +6,7 @@ import 'package:em_cartaz/app/modules/user_identification/user_identification_st
 import 'package:em_cartaz/app/widgets/button_widget.dart';
 import 'package:em_cartaz/app/widgets/input_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class UserIdentificationPage extends StatefulWidget {
@@ -54,14 +55,24 @@ class UserIdentificationPageState
                     ),
                     child: Column(
                       children: [
-                        InputWidget(
-                          title: 'Nome',
-                          onChange: (value) => controller.user = value,
+                        Observer(
+                          builder: (_) {
+                            return InputWidget(
+                              title: 'Nome',
+                              onChange: (value) => controller.user = value,
+                              error: controller.errorUser,
+                            );
+                          },
                         ),
                         SizedBox(height: 10),
-                        InputWidget(
-                          title: 'Sigla UF',
-                          onChange: (value) => controller.uf = value,
+                        Observer(
+                          builder: (_) {
+                            return InputWidget(
+                              title: 'Sigla UF',
+                              onChange: (value) => controller.uf = value,
+                              error: controller.erroUf,
+                            );
+                          },
                         ),
                         Container(
                           margin: EdgeInsetsDirectional.only(
@@ -69,16 +80,25 @@ class UserIdentificationPageState
                             bottom: 20,
                           ),
                           height: 56,
-                          child: ButtonWidget(
-                            title: Text(
-                              'Salvar',
-                              style: AppStyles.buttonText,
-                            ),
-                            submit: () => controller.saveInformationInitial(
-                              uf: controller.uf,
-                              user: controller.user,
-                              context: context,
-                            ),
+                          child: Observer(
+                            builder: (_) {
+                              return ButtonWidget(
+                                title: controller.isloading
+                                    ? CircularProgressIndicator(
+                                        strokeWidth: 1,
+                                        color: AppColors.white,
+                                      )
+                                    : Text(
+                                        'Salvar',
+                                        style: AppStyles.buttonText,
+                                      ),
+                                submit: () => controller.saveInformationInitial(
+                                  uf: controller.uf,
+                                  user: controller.user,
+                                  context: context,
+                                ),
+                              );
+                            },
                           ),
                         )
                       ],
