@@ -2,9 +2,11 @@
 
 import 'package:em_cartaz/app/core/themes/app_colors.dart';
 import 'package:em_cartaz/app/core/themes/app_styles.dart';
+import 'package:em_cartaz/app/modules/user_identification/user_identification_store.dart';
 import 'package:em_cartaz/app/widgets/button_widget.dart';
 import 'package:em_cartaz/app/widgets/input_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class UserIdentificationPage extends StatefulWidget {
   const UserIdentificationPage({
@@ -14,7 +16,8 @@ class UserIdentificationPage extends StatefulWidget {
   UserIdentificationPageState createState() => UserIdentificationPageState();
 }
 
-class UserIdentificationPageState extends State<UserIdentificationPage> {
+class UserIdentificationPageState
+    extends ModularState<UserIdentificationPage, UserIdentificationStore> {
   @override
   Widget build(BuildContext context) {
     final screen = MediaQuery.of(context).size;
@@ -55,10 +58,12 @@ class UserIdentificationPageState extends State<UserIdentificationPage> {
                       children: [
                         InputWidget(
                           title: 'Nome',
+                          onChange: (value) => controller.user = value,
                         ),
                         SizedBox(height: 10),
                         InputWidget(
                           title: 'Sigla UF',
+                          onChange: (value) => controller.uf = value,
                         ),
                         Container(
                           margin: EdgeInsetsDirectional.only(
@@ -71,9 +76,11 @@ class UserIdentificationPageState extends State<UserIdentificationPage> {
                               'Salvar',
                               style: AppStyles.buttonText,
                             ),
-                            submit: () => {
-                              FocusScope.of(context).unfocus(),
-                            },
+                            submit: () => controller.saveInformationInitial(
+                              uf: controller.uf,
+                              user: controller.user,
+                              context: context,
+                            ),
                           ),
                         )
                       ],
