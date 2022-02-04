@@ -19,6 +19,8 @@ dependencies:
   flutter_mobx: ^2.0.4
   google_fonts: ^2.2.0
   lottie: ^1.2.1
+  shared_preferences: ^2.0.12
+  motion_toast: ^2.1.1
 
 dev_dependencies:
   flutter_test:
