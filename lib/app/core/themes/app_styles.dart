@@ -8,4 +8,10 @@ class AppStyles {
     fontWeight: FontWeight.bold,
     fontSize: 16,
   );
+
+  static final buttonText = GoogleFonts.poppins(
+    color: AppColors.white,
+    fontWeight: FontWeight.bold,
+    fontSize: 16,
+  );
 }
