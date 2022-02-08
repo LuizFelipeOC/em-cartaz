@@ -15,10 +15,14 @@ abstract class _HomeStoreBase with Store {
   CityModels? cities;
 
   @observable
-  List<DestaquesModels>? list;
+  List<DestaquesModels>? listDestques;
+
+  @observable
+  bool isLoading = false;
 
   @action
   getFilmesCityFornecidas() async {
+    isLoading = true;
     final prefs = await SharedPreferences.getInstance();
     final dio = Dio();
 
@@ -31,17 +35,20 @@ abstract class _HomeStoreBase with Store {
 
     var idCidade = cities?.cities?.first.id;
 
-    print(idCidade);
-
     var destaquesCidade = await dio.get(
       'https://api-content.ingresso.com/v0/templates/highlights/$idCidade?partnership=%22%22',
     );
 
     List<dynamic> destaquesModels = destaquesCidade.data;
 
-    var listEvents =
-        destaquesModels.map((e) => DestaquesModels.fromJson(e)).toList();
+    var listEvents = destaquesModels
+        .map(
+          (e) => DestaquesModels.fromJson(e),
+        )
+        .toList();
 
-    list = listEvents;
+    listDestques = listEvents;
+
+    isLoading = false;
   }
 }
