@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:em_cartaz/app/modules/home/models/destaques_models.dart';
-import 'package:em_cartaz/app/widgets/classific_widget.dart';
+import 'package:em_cartaz/app/widgets/classific/classific_widget.dart';
 import 'package:flutter/material.dart';
 
 class CardWidget extends StatelessWidget {
