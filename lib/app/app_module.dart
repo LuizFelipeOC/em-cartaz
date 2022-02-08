@@ -1,4 +1,4 @@
-import 'package:em_cartaz/app/modules/details/details_module.dart';
+import 'package:em_cartaz/app/modules/home/details_destaques/detailsDestaques_module.dart';
 import 'package:em_cartaz/app/modules/home/home_module.dart';
 import 'package:em_cartaz/app/modules/splash/splash_module.dart';
 import 'package:em_cartaz/app/modules/user_identification/userIdentification_module.dart';
@@ -13,6 +13,6 @@ class AppModule extends Module {
     ModuleRoute(Modular.initialRoute, module: SplashModule()),
     ModuleRoute('/initialConfig/', module: UserIdentificationModule()),
     ModuleRoute('/home/', module: HomeModule()),
-    ModuleRoute('/details/', module: DetailsModule()),
+    ModuleRoute('/home/details/destaques/', module: DetailsDestaquesModule())
   ];
 }
