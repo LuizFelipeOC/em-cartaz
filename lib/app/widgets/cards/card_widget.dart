@@ -19,7 +19,8 @@ class CardWidget extends StatelessWidget {
       child: Stack(
         children: [
           CachedNetworkImage(
-            imageUrl: '${images?.url}',
+            imageUrl: images?.url ??
+                'https://image.freepik.com/vetores-gratis/glitch-error-404-page_23-2148105404.jpg',
             placeholder: (context, url) => const CircularProgressIndicator(),
             // errorWidget: (context, url, error) => const Icon(Icons.error),
           ),
