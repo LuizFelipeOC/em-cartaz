@@ -93,14 +93,18 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                                         (BuildContext context, int index) {
                                       return Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: CardWidget(
-                                          images: controller
-                                              .listDestques?[index]
-                                              .event
-                                              ?.images
-                                              ?.first,
-                                          event: controller
-                                              .listDestques?[index].event,
+                                        child: GestureDetector(
+                                          child: CardWidget(
+                                            images: controller
+                                                .listDestques?[index]
+                                                .event
+                                                ?.images
+                                                ?.first,
+                                            event: controller
+                                                .listDestques?[index].event,
+                                          ),
+                                          onTap: () =>
+                                              controller.navigatorDetails(),
                                         ),
                                       );
                                     },

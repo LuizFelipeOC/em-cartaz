@@ -3,6 +3,7 @@ import 'package:em_cartaz/app/modules/home/models/cartaz_models.dart';
 import 'package:em_cartaz/app/modules/home/models/city_models.dart';
 import 'package:em_cartaz/app/modules/home/models/destaques_models.dart';
 import 'package:em_cartaz/app/modules/home/models/soon_models.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'home_store.g.dart';
@@ -114,5 +115,10 @@ abstract class _HomeStoreBase with Store {
   @action
   bottomBarController(value) {
     index = value;
+  }
+
+  @action
+  navigatorDetails() async {
+    Modular.to.navigate('/home/details/destaques/');
   }
 }
