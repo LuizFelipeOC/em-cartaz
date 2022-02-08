@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:em_cartaz/app/modules/home/models/cartaz_models.dart';
 import 'package:em_cartaz/app/modules/home/models/city_models.dart';
 import 'package:em_cartaz/app/modules/home/models/destaques_models.dart';
+import 'package:em_cartaz/app/modules/home/models/soon_models.dart';
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'home_store.g.dart';
@@ -12,6 +13,7 @@ abstract class _HomeStoreBase with Store {
   _HomeStoreBase() {
     getMoviesDestaques();
     getMoviesCartaz();
+    getMoviesSoon();
   }
 
   CityModels? cities;
@@ -21,6 +23,9 @@ abstract class _HomeStoreBase with Store {
 
   @observable
   List<MovieCartaz>? listCartaz;
+
+  @observable
+  List<SoonModels>? listSoon;
 
   @observable
   bool isLoading = false;
@@ -79,13 +84,35 @@ abstract class _HomeStoreBase with Store {
     List<dynamic> listaC = destaquesCartaz.data;
 
     listCartaz = listaC.map((e) => MovieCartaz.fromJson(e)).toList();
+  }
+
+  @action
+  getMoviesSoon() async {
+    final prefs = await SharedPreferences.getInstance();
+    final dio = Dio();
+
+    var uf = prefs.getString('UF');
+
+    var response =
+        await dio.get('https://api-content.ingresso.com/v0/states/$uf');
+
+    cities = CityModels.fromJson(response.data);
+
+    var idCidade = cities?.cities?.first.id;
+
+    var soonMovies = await dio.get(
+      'https://api-content.ingresso.com/v0/templates/soon/$idCidade?partnership=',
+    );
+
+    List<dynamic> listaSoonMovies = soonMovies.data;
+
+    listSoon = listaSoonMovies.map((e) => SoonModels.fromJson(e)).toList();
 
     isLoading = false;
   }
 
   @action
   bottomBarController(value) {
-    print(value);
     index = value;
   }
 }
