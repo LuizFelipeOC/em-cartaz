@@ -39,35 +39,27 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                 ),
                 SizedBox(width: 20),
                 Text(
-                  'Em Cartaz',
+                  'Em Cartaz App',
                   style: AppStyles.buttonText,
                 ),
               ],
             ),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.list,
-                size: 36,
-              ),
-            ),
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              end: Alignment.bottomRight,
-              colors: const [
-                AppColors.darkGradientFirst,
-                AppColors.darkGradientSecond,
-              ],
-            ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            end: Alignment.bottomRight,
+            colors: const [
+              AppColors.darkGradientFirst,
+              AppColors.darkGradientSecond,
+            ],
           ),
+        ),
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: SizedBox(
-            height: screen.height,
             width: screen.width,
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -122,7 +114,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                   padding: const EdgeInsets.only(
                     left: 30,
                     top: 10,
-                    bottom: 20,
+                    bottom: 5,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -164,6 +156,33 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
           ),
         ),
       ),
+      bottomNavigationBar: Observer(builder: (_) {
+        return BottomNavigationBar(
+          backgroundColor: AppColors.darkGradientSecond,
+          elevation: 0,
+          selectedItemColor: AppColors.white,
+          currentIndex: controller.index,
+          onTap: (value) => controller.bottomBarController(value),
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.business,
+              ),
+              label: 'Shoppings',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home,
+              ),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.list),
+              label: 'Menu',
+            ),
+          ],
+        );
+      }),
     );
   }
 }
