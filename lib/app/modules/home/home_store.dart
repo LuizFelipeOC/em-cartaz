@@ -25,6 +25,9 @@ abstract class _HomeStoreBase with Store {
   @observable
   bool isLoading = false;
 
+  @observable
+  int index = 1;
+
   @action
   getMoviesDestaques() async {
     isLoading = true;
@@ -78,5 +81,11 @@ abstract class _HomeStoreBase with Store {
     listCartaz = listaC.map((e) => MovieCartaz.fromJson(e)).toList();
 
     isLoading = false;
+  }
+
+  @action
+  bottomBarController(value) {
+    print(value);
+    index = value;
   }
 }
