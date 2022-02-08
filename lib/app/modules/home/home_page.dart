@@ -3,6 +3,7 @@
 import 'package:em_cartaz/app/core/themes/app_colors.dart';
 import 'package:em_cartaz/app/core/themes/app_styles.dart';
 import 'package:em_cartaz/app/modules/home/home_store.dart';
+import 'package:em_cartaz/app/widgets/card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -44,7 +45,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
             IconButton(
               onPressed: () {},
               icon: Icon(
-                Icons.manage_accounts_outlined,
+                Icons.list,
                 size: 36,
               ),
             ),
@@ -77,24 +78,29 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                       'Filmes em Destaques',
                       style: AppStyles.buttonText,
                     ),
-                    Container(
-                      height: screen.height * .20,
+                    SizedBox(
+                      height: screen.height * .40,
                       child: Observer(
                         builder: (_) {
-                          return ListView.builder(
-                            physics: const BouncingScrollPhysics(),
-                            itemCount: controller.list?.length,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Card(
-                                  child: Text(
-                                      '${controller.list?[index].event?.title}'),
-                                ),
-                              );
-                            },
-                          );
+                          return controller.isLoading
+                              ? Container()
+                              : ListView.builder(
+                                  physics: const BouncingScrollPhysics(),
+                                  itemCount: controller.listDestques?.length,
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: CardWidget(
+                                        images: controller.listDestques?[index]
+                                            .event?.images?.first,
+                                        event: controller
+                                            .listDestques?[index].event,
+                                      ),
+                                    );
+                                  },
+                                );
                         },
                       ),
                     )
