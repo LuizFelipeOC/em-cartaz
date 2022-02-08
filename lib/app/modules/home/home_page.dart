@@ -4,6 +4,7 @@ import 'package:em_cartaz/app/core/themes/app_colors.dart';
 import 'package:em_cartaz/app/core/themes/app_styles.dart';
 import 'package:em_cartaz/app/modules/home/home_store.dart';
 import 'package:em_cartaz/app/widgets/cards/card_cartaz_widget.dart';
+import 'package:em_cartaz/app/widgets/cards/card_soon_widget.dart';
 import 'package:em_cartaz/app/widgets/cards/card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -75,7 +76,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Filmes em Destaques',
+                        'Em Destaques',
                         style: AppStyles.buttonText,
                       ),
                       SizedBox(
@@ -120,7 +121,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Filmes em Cartaz',
+                        'Em Cartaz',
                         style: AppStyles.buttonText,
                       ),
                       SizedBox(
@@ -141,6 +142,47 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                                           images: controller
                                               .listCartaz?[index].images?.first,
                                           event: controller.listCartaz?[index],
+                                        ),
+                                      );
+                                    },
+                                  );
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 30,
+                    top: 10,
+                    bottom: 5,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Em breve',
+                        style: AppStyles.buttonText,
+                      ),
+                      SizedBox(
+                        height: screen.height * .40,
+                        child: Observer(
+                          builder: (_) {
+                            return controller.isLoading
+                                ? Container()
+                                : ListView.builder(
+                                    physics: const BouncingScrollPhysics(),
+                                    itemCount: controller.listSoon?.length,
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: CardSoonWidget(
+                                          images: controller
+                                              .listSoon?[index].images?.first,
+                                          event: controller.listSoon?[index],
                                         ),
                                       );
                                     },
