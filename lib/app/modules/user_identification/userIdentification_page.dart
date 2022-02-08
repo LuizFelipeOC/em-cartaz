@@ -3,8 +3,8 @@
 import 'package:em_cartaz/app/core/themes/app_colors.dart';
 import 'package:em_cartaz/app/core/themes/app_styles.dart';
 import 'package:em_cartaz/app/modules/user_identification/user_identification_store.dart';
-import 'package:em_cartaz/app/widgets/button_widget.dart';
-import 'package:em_cartaz/app/widgets/input_widget.dart';
+import 'package:em_cartaz/app/widgets/buttons/button_widget.dart';
+import 'package:em_cartaz/app/widgets/inputs/input_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
