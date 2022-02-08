@@ -429,14 +429,12 @@ class Functionalities {
 
 class Rooms {
   String? name;
-  Null? type;
   List<Sessions>? sessions;
 
-  Rooms({this.name, this.type, this.sessions});
+  Rooms({this.name, this.sessions});
 
   Rooms.fromJson(Map<String, dynamic> json) {
     name = json['name'];
-    type = json['type'];
     if (json['sessions'] != null) {
       sessions = <Sessions>[];
       json['sessions'].forEach((v) {
@@ -448,7 +446,6 @@ class Rooms {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = name;
-    data['type'] = type;
     if (sessions != null) {
       data['sessions'] = sessions!.map((v) => v.toJson()).toList();
     }
