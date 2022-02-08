@@ -20,10 +20,11 @@ dependencies:
   google_fonts: ^2.2.0
   lottie: ^1.2.1
   shared_preferences: ^2.0.12
-  motion_toast: ^2.1.1
   sqflite: ^2.0.2
   path: ^1.8.0
   dio: ^4.0.4
+  shimmer: ^2.0.0
+  cached_network_image: ^3.2.0
 
 dev_dependencies:
   flutter_test:
