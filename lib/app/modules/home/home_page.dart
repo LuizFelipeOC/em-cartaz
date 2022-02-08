@@ -39,7 +39,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                 ),
                 SizedBox(width: 20),
                 Text(
-                  'Em Cartaz App',
+                  'Em Cartaz',
                   style: AppStyles.buttonText,
                 ),
               ],
@@ -159,9 +159,11 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
       bottomNavigationBar: Observer(builder: (_) {
         return BottomNavigationBar(
           backgroundColor: AppColors.darkGradientSecond,
-          elevation: 0,
+          elevation: 10,
           selectedItemColor: AppColors.white,
           currentIndex: controller.index,
+          selectedLabelStyle: AppStyles.textAppbar,
+          unselectedLabelStyle: AppStyles.textAppbar,
           onTap: (value) => controller.bottomBarController(value),
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
@@ -177,8 +179,8 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.list),
-              label: 'Menu',
+              icon: Icon(Icons.settings),
+              label: 'Configuração',
             ),
           ],
         );
