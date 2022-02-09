@@ -3,6 +3,7 @@
 import 'package:em_cartaz/app/core/themes/app_colors.dart';
 import 'package:em_cartaz/app/core/themes/app_styles.dart';
 import 'package:em_cartaz/app/modules/home/home_store.dart';
+import 'package:em_cartaz/app/modules/home/models/destaques_models.dart';
 import 'package:em_cartaz/app/widgets/cards/card_cartaz_widget.dart';
 import 'package:em_cartaz/app/widgets/cards/card_soon_widget.dart';
 import 'package:em_cartaz/app/widgets/cards/card_widget.dart';
@@ -103,8 +104,13 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                                             event: controller
                                                 .listDestques?[index].event,
                                           ),
-                                          onTap: () =>
-                                              controller.navigatorDetails(),
+                                          onTap: () => Modular.to.pushNamed(
+                                            '/home/details/destaques/',
+                                            arguments: DestaquesModels(
+                                              event: controller
+                                                  .listDestques?[index].event,
+                                            ),
+                                          ),
                                         ),
                                       );
                                     },

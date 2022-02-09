@@ -118,7 +118,10 @@ abstract class _HomeStoreBase with Store {
   }
 
   @action
-  navigatorDetails() async {
-    Modular.to.navigate('/home/details/destaques/');
+  navigatorDetails(destaquesModels) async {
+    Modular.to.pushNamed(
+      '/home/details/destaques/',
+      arguments: destaquesModels,
+    );
   }
 }
