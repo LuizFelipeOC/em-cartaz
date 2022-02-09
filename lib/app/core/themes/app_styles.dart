@@ -15,9 +15,28 @@ class AppStyles {
     fontSize: 16,
   );
 
+  static final textAppBarHeading = GoogleFonts.poppins(
+    color: AppColors.white,
+    fontWeight: FontWeight.bold,
+    fontSize: 16,
+    shadows: const [
+      BoxShadow(
+        color: AppColors.darkGradientFirst,
+        offset: Offset(1.0, 1.0),
+        blurRadius: 5.0,
+      ),
+    ],
+  );
+
   static final textAppbar = GoogleFonts.poppins(
     color: AppColors.white,
     fontWeight: FontWeight.w500,
+    fontSize: 14,
+  );
+
+  static final text = GoogleFonts.poppins(
+    color: AppColors.white,
+    fontWeight: FontWeight.w400,
     fontSize: 14,
   );
 
