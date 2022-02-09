@@ -1,4 +1,3 @@
-import 'package:em_cartaz/app/modules/home/home_page.dart';
 import 'package:em_cartaz/app/modules/splash/splash_Page.dart';
 import 'package:em_cartaz/app/modules/splash/splash_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';

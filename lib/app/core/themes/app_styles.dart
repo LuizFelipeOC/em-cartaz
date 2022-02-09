@@ -6,12 +6,24 @@ class AppStyles {
   static final heading = GoogleFonts.poppins(
     color: AppColors.darkGradientSecond,
     fontWeight: FontWeight.bold,
-    fontSize: 16,
+    fontSize: 18,
   );
 
   static final buttonText = GoogleFonts.poppins(
     color: AppColors.white,
     fontWeight: FontWeight.bold,
+    fontSize: 16,
+  );
+
+  static final textAppbar = GoogleFonts.poppins(
+    color: AppColors.white,
+    fontWeight: FontWeight.w500,
+    fontSize: 14,
+  );
+
+  static final textSynops = GoogleFonts.poppins(
+    color: AppColors.white,
+    fontWeight: FontWeight.w300,
     fontSize: 16,
   );
 }
