@@ -109,6 +109,9 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                                             arguments: DestaquesModels(
                                               event: controller
                                                   .listDestques?[index].event,
+                                              showtimes: controller
+                                                  .listDestques?[index]
+                                                  .showtimes,
                                             ),
                                           ),
                                         ),

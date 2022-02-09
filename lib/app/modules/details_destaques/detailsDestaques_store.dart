@@ -1,3 +1,4 @@
+import 'package:em_cartaz/app/modules/home/models/destaques_models.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
