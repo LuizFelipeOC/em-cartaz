@@ -20,4 +20,10 @@ class AppStyles {
     fontWeight: FontWeight.w500,
     fontSize: 14,
   );
+
+  static final textSynops = GoogleFonts.poppins(
+    color: AppColors.white,
+    fontWeight: FontWeight.w300,
+    fontSize: 16,
+  );
 }
