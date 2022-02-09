@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.em_cartaz">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
    <application
         android:label="em_cartaz"
         android:name="${applicationName}"
