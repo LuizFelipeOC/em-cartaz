@@ -1,5 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 part 'detailsDestaques_store.g.dart';
 
@@ -21,5 +22,9 @@ abstract class _DetailsDestaquesStoreBase with Store {
     final minutes = duration % 60;
 
     return movieHours = '${hour.floor()} : $minutes';
+  }
+
+  goTrailer(url) {
+    launch(url);
   }
 }

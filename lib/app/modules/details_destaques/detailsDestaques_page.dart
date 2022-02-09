@@ -239,7 +239,10 @@ class DetailsDestaquesPageState
                                 ),
                               ),
                               IconButton(
-                                onPressed: () {},
+                                onPressed: () => controller.goTrailer(
+                                  widget.destaquesModels?.event
+                                      ?.trailers?[index].url,
+                                ),
                                 icon: Icon(
                                   Icons.play_arrow_outlined,
                                   color: AppColors.red,
