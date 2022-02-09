@@ -15,6 +15,7 @@ class DetailsDestaquesModule extends Module {
       child: (_, args) => DetailsDestaquesPage(
         destaquesModels: args.data,
       ),
+      transition: TransitionType.fadeIn,
     ),
   ];
 }
