@@ -119,10 +119,21 @@ class Event {
     nationalSiteURL = json['nationalSiteURL'];
     if (json['images'] != null) {
       images = <Images>[];
-      json['images'].forEach((v) {
-        images!.add(Images.fromJson(v));
-      });
+      json['images'].forEach(
+        (v) {
+          images!.add(Images.fromJson(v));
+        },
+      );
     }
+    if (json['trailers'] != null) {
+      trailers = <Trailers>[];
+      json['trailers'].forEach(
+        (v) {
+          trailers!.add(Trailers.fromJson(v));
+        },
+      );
+    }
+
     genres = json['genres'].cast<String>();
     ratingDescriptors = json['ratingDescriptors'].cast<String>();
 
