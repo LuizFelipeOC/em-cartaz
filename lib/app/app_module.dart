@@ -1,4 +1,4 @@
-import 'package:em_cartaz/app/modules/home/details_destaques/detailsDestaques_module.dart';
+import 'package:em_cartaz/app/modules/details_destaques/detailsDestaques_module.dart';
 import 'package:em_cartaz/app/modules/home/home_module.dart';
 import 'package:em_cartaz/app/modules/splash/splash_module.dart';
 import 'package:em_cartaz/app/modules/user_identification/userIdentification_module.dart';
