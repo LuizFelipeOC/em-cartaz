@@ -1,29 +1,114 @@
-import 'package:em_cartaz/app/modules/home/models/cartaz_models.dart';
+import 'package:em_cartaz/app/modules/home/models/destaques_models.dart';
 
-class DestaquesModels {
-  MovieCartaz? event;
+class MoviesModels {
+  List<Movie>? data;
   List<Showtimes>? showtimes;
 
-  DestaquesModels({this.event, this.showtimes});
+  MoviesModels({
+    this.data,
+    this.showtimes,
+  });
+}
 
-  DestaquesModels.fromJson(Map<String, dynamic> json) {
-    event = json['event'] != null ? MovieCartaz.fromJson(json['event']) : null;
-    if (json['showtimes'] != null) {
-      showtimes = <Showtimes>[];
-      json['showtimes'].forEach((v) {
-        showtimes!.add(Showtimes.fromJson(v));
-      });
-    }
-  }
+class Movie {
+  String? id;
+  String? title;
+  String? originalTitle;
+  String? movieIdUrl;
+  String? ancineId;
+  String? countryOrigin;
+  int? priority;
+  String? contentRating;
+  String? duration;
+  dynamic rating;
+  String? synopsis;
+  String? cast;
+  String? director;
+  String? distributor;
+  bool? inPreSale;
+  bool? isReexhibition;
+  String? urlKey;
+  bool? isPlaying;
+  int? countIsPlaying;
+  PremiereDate? premiereDate;
+  String? creationDate;
+  String? city;
+  String? siteURL;
+  String? nationalSiteURL;
+  List<Images>? images;
+  List<String>? genres;
+  List<String>? ratingDescriptors;
+  List<Trailers>? trailers;
+  String? boxOfficeId;
+  RottenTomatoe? rottenTomatoe;
+
+  Movie(
+      {this.id,
+      this.title,
+      this.originalTitle,
+      this.movieIdUrl,
+      this.ancineId,
+      this.countryOrigin,
+      this.priority,
+      this.contentRating,
+      this.duration,
+      this.rating,
+      this.synopsis,
+      this.cast,
+      this.director,
+      this.distributor,
+      this.inPreSale,
+      this.isReexhibition,
+      this.urlKey,
+      this.isPlaying,
+      this.countIsPlaying,
+      this.premiereDate,
+      this.creationDate,
+      this.city,
+      this.siteURL,
+      this.nationalSiteURL,
+      this.images,
+      this.genres,
+      this.ratingDescriptors,
+      this.trailers,
+      this.boxOfficeId,
+      this.rottenTomatoe});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    if (event != null) {
-      data['event'] = event!.toJson();
+    data['id'] = id;
+    data['title'] = title;
+    data['originalTitle'] = originalTitle;
+    data['movieIdUrl'] = movieIdUrl;
+    data['ancineId'] = ancineId;
+    data['countryOrigin'] = countryOrigin;
+    data['priority'] = priority;
+    data['contentRating'] = contentRating;
+    data['duration'] = duration;
+    data['rating'] = rating;
+    data['synopsis'] = synopsis;
+    data['cast'] = cast;
+    data['director'] = director;
+    data['distributor'] = distributor;
+    data['inPreSale'] = inPreSale;
+    data['isReexhibition'] = isReexhibition;
+    data['urlKey'] = urlKey;
+    data['isPlaying'] = isPlaying;
+    data['countIsPlaying'] = countIsPlaying;
+    if (premiereDate != null) {
+      data['premiereDate'] = premiereDate!.toJson();
     }
-    if (showtimes != null) {
-      data['showtimes'] = showtimes!.map((v) => v.toJson()).toList();
+    data['creationDate'] = creationDate;
+    data['city'] = city;
+    data['siteURL'] = siteURL;
+    data['nationalSiteURL'] = nationalSiteURL;
+    if (images != null) {
+      data['images'] = images!.map((v) => v.toJson()).toList();
     }
+    data['genres'] = genres;
+    data['ratingDescriptors'] = ratingDescriptors;
+    data['boxOfficeId'] = boxOfficeId;
+
     return data;
   }
 }
@@ -280,166 +365,6 @@ class Functionalities {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['operationPolicyEnabled'] = operationPolicyEnabled;
-    return data;
-  }
-}
-
-class Rooms {
-  String? name;
-  List<Sessions>? sessions;
-
-  Rooms({this.name, this.sessions});
-
-  Rooms.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    if (json['sessions'] != null) {
-      sessions = <Sessions>[];
-      json['sessions'].forEach((v) {
-        sessions!.add(Sessions.fromJson(v));
-      });
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['name'] = name;
-    if (sessions != null) {
-      data['sessions'] = sessions!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
-
-class Sessions {
-  String? id;
-  double? price;
-  String? room;
-  List<String>? type;
-  List<Types>? types;
-  PremiereDate? date;
-  PremiereDate? realDate;
-  String? time;
-  String? defaultSector;
-  String? siteURL;
-  bool? hasSeatSelection;
-  bool? driveIn;
-  bool? streaming;
-  int? maxTicketsPerCar;
-  bool? enabled;
-  String? blockMessage;
-
-  Sessions(
-      {this.id,
-      this.price,
-      this.room,
-      this.type,
-      this.types,
-      this.date,
-      this.realDate,
-      this.time,
-      this.defaultSector,
-      this.siteURL,
-      this.hasSeatSelection,
-      this.driveIn,
-      this.streaming,
-      this.maxTicketsPerCar,
-      this.enabled,
-      this.blockMessage});
-
-  Sessions.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    price = json['price'];
-    room = json['room'];
-    type = json['type'].cast<String>();
-    if (json['types'] != null) {
-      types = <Types>[];
-      json['types'].forEach((v) {
-        types!.add(Types.fromJson(v));
-      });
-    }
-    date = json['date'] != null ? PremiereDate.fromJson(json['date']) : null;
-    realDate = json['realDate'] != null
-        ? PremiereDate.fromJson(json['realDate'])
-        : null;
-    time = json['time'];
-    defaultSector = json['defaultSector'];
-    siteURL = json['siteURL'];
-    hasSeatSelection = json['hasSeatSelection'];
-    driveIn = json['driveIn'];
-    streaming = json['streaming'];
-    maxTicketsPerCar = json['maxTicketsPerCar'];
-    enabled = json['enabled'];
-    blockMessage = json['blockMessage'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['price'] = price;
-    data['room'] = room;
-    data['type'] = type;
-    if (types != null) {
-      data['types'] = types!.map((v) => v.toJson()).toList();
-    }
-    if (date != null) {
-      data['date'] = date!.toJson();
-    }
-    if (realDate != null) {
-      data['realDate'] = realDate!.toJson();
-    }
-    data['time'] = time;
-    data['defaultSector'] = defaultSector;
-    data['siteURL'] = siteURL;
-    data['hasSeatSelection'] = hasSeatSelection;
-    data['driveIn'] = driveIn;
-    data['streaming'] = streaming;
-    data['maxTicketsPerCar'] = maxTicketsPerCar;
-    data['enabled'] = enabled;
-    data['blockMessage'] = blockMessage;
-    return data;
-  }
-}
-
-class Types {
-  int? id;
-  String? name;
-  String? alias;
-  bool? display;
-
-  Types({this.id, this.name, this.alias, this.display});
-
-  Types.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    alias = json['alias'];
-    display = json['display'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    data['alias'] = alias;
-    data['display'] = display;
-    return data;
-  }
-}
-
-class Geolocation {
-  double? lat;
-  double? lng;
-
-  Geolocation({this.lat, this.lng});
-
-  Geolocation.fromJson(Map<String, dynamic> json) {
-    lat = json['lat'];
-    lng = json['lng'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['lat'] = lat;
-    data['lng'] = lng;
     return data;
   }
 }

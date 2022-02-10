@@ -14,9 +14,7 @@ class SplashPage extends StatefulWidget {
   SplashPageState createState() => SplashPageState();
 }
 
-class SplashPageState extends State<SplashPage> {
-  final SplashStore store = Modular.get();
-
+class SplashPageState extends ModularState<SplashPage, SplashStore> {
   @override
   Widget build(BuildContext context) {
     final screen = MediaQuery.of(context).size;
@@ -24,7 +22,7 @@ class SplashPageState extends State<SplashPage> {
     Future.delayed(
       const Duration(seconds: 4),
       () {
-        Modular.to.navigate('/initialConfig');
+        controller.verifyCache();
       },
     );
 
