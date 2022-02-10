@@ -12,7 +12,7 @@ abstract class _SplashStoreBase with Store {
 
     final user = prefs.getString('NOME');
 
-    if (user!.isEmpty || user == "") {
+    if (user == null) {
       return Modular.to.pushReplacementNamed('/initialConfig/');
     }
 
