@@ -1,18 +1,21 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_is_empty
 
 import 'package:em_cartaz/app/core/themes/app_colors.dart';
 import 'package:em_cartaz/app/core/themes/app_styles.dart';
 import 'package:em_cartaz/app/modules/details_destaques/detailsDestaques_store.dart';
+import 'package:em_cartaz/app/modules/home/models/cartaz_models.dart';
 import 'package:em_cartaz/app/modules/home/models/destaques_models.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
 
 class DetailsDestaquesPage extends StatefulWidget {
-  final DestaquesModels? destaquesModels;
+  final MovieCartaz? destaquesModels;
+  final List<Showtimes>? showTimes;
 
   const DetailsDestaquesPage({
     Key? key,
     @required this.destaquesModels,
+    this.showTimes,
   }) : super(key: key);
 
   @override
@@ -25,8 +28,7 @@ class DetailsDestaquesPageState
   Widget build(BuildContext context) {
     final screen = MediaQuery.of(context).size;
 
-    controller
-        .getDuration(int.parse(widget.destaquesModels?.event?.duration ?? "0"));
+    controller.getDuration(int.parse(widget.destaquesModels?.duration ?? "0"));
 
     return Scaffold(
       appBar: PreferredSize(
@@ -37,7 +39,7 @@ class DetailsDestaquesPageState
               SizedBox(
                 height: screen.height * .30,
                 child: Image.network(
-                  '${widget.destaquesModels?.event?.images?.last.url}',
+                  '${widget.destaquesModels?.images?.last.url}',
                   width: screen.height * 90,
                   fit: BoxFit.cover,
                 ),
@@ -72,7 +74,7 @@ class DetailsDestaquesPageState
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          '${widget.destaquesModels?.event?.title}',
+                          '${widget.destaquesModels?.title}',
                           style: AppStyles.textAppBarHeading,
                           textAlign: TextAlign.center,
                         ),
@@ -90,7 +92,7 @@ class DetailsDestaquesPageState
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        widget.destaquesModels?.event?.rating == "0.0"
+                        widget.destaquesModels?.rating == "0.0"
                             ? Row(
                                 children: [
                                   Icon(
@@ -99,11 +101,10 @@ class DetailsDestaquesPageState
                                   ),
                                   SizedBox(width: 10),
                                   Text(
-                                    widget.destaquesModels?.event?.rating
-                                                .toString() ==
+                                    widget.destaquesModels?.rating.toString() ==
                                             "0.0"
                                         ? "-"
-                                        : widget.destaquesModels?.event?.rating,
+                                        : widget.destaquesModels?.rating,
                                     style: AppStyles.textAppBarHeading,
                                   ),
                                 ],
@@ -118,7 +119,7 @@ class DetailsDestaquesPageState
                             SizedBox(width: 10),
                             Text(
                               '${controller.getDuration(int.parse(
-                                widget.destaquesModels?.event?.duration ?? '0',
+                                widget.destaquesModels?.duration ?? '0',
                               ))}',
                               style: AppStyles.textAppBarHeading,
                             ),
@@ -160,7 +161,7 @@ class DetailsDestaquesPageState
                       style: AppStyles.buttonText,
                     ),
                     Text(
-                      '${widget.destaquesModels?.event?.synopsis?.trim()}',
+                      '${widget.destaquesModels?.synopsis?.trim()}',
                       style: AppStyles.textSynops,
                     )
                   ],
@@ -176,132 +177,137 @@ class DetailsDestaquesPageState
                       style: AppStyles.buttonText,
                     ),
                     Text(
-                      'Diretor: ${widget.destaquesModels?.event?.director}',
+                      'Diretor: ${widget.destaquesModels?.director}',
                       style: AppStyles.text,
                     ),
                     Text(
-                      'Distribuição: ${widget.destaquesModels?.event?.distributor}',
+                      'Distribuição: ${widget.destaquesModels?.distributor}',
                       style: AppStyles.text,
                     ),
                     Text(
-                      'Geneto: ${widget.destaquesModels?.event?.genres}',
+                      'Geneto: ${widget.destaquesModels?.genres}',
                       style: AppStyles.text,
                     ),
                     Text(
-                      'Classificação: ${widget.destaquesModels?.event?.contentRating}',
+                      'Classificação: ${widget.destaquesModels?.contentRating}',
                       style: AppStyles.text,
                     )
                   ],
                 ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Text(
-                      'Trailers',
-                      style: AppStyles.buttonText,
-                    ),
-                  ),
-                  Container(
-                    height: screen.height * .20,
-                    width: screen.width,
-                    margin: EdgeInsets.only(left: 20),
-                    child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemCount:
-                          widget.destaquesModels?.event?.trailers?.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              Container(
-                                height: 200,
-                                child: Image.network(
-                                  '${widget.destaquesModels?.event?.images?.first.url}',
-                                  color: AppColors.darkGradientSecond
-                                      .withOpacity(0.7),
-                                  fit: BoxFit.cover,
-                                  colorBlendMode: BlendMode.modulate,
-                                ),
-                              ),
-                              IconButton(
-                                onPressed: () => controller.goTrailer(
-                                  widget.destaquesModels?.event
-                                      ?.trailers?[index].url,
-                                ),
-                                icon: Icon(
-                                  Icons.play_arrow_outlined,
-                                  color: AppColors.red,
-                                  size: 30,
-                                ),
-                              )
-                            ],
+              widget.destaquesModels?.trailers?.length == 0
+                  ? Container()
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: Text(
+                            'Trailers',
+                            style: AppStyles.buttonText,
                           ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Text(
-                      'Cinemas com o filme em sessões',
-                      style: AppStyles.buttonText,
-                    ),
-                  ),
-                  Container(
-                    height: screen.height * .20,
-                    width: screen.width,
-                    margin: EdgeInsets.only(left: 20, bottom: 20),
-                    child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      scrollDirection: Axis.vertical,
-                      itemCount: widget.destaquesModels?.showtimes?.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          margin: EdgeInsets.only(bottom: 10, right: 20),
-                          height: screen.height * .06,
-                          decoration: BoxDecoration(
-                            color: AppColors.darkGradientFirst,
-                            border: Border(
-                              bottom: BorderSide(
-                                color: AppColors.red,
-                                width: 1,
-                              ),
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '${widget.destaquesModels?.showtimes?[index].name}',
-                                  style: AppStyles.text,
+                        ),
+                        Container(
+                          height: screen.height * .20,
+                          width: screen.width,
+                          margin: EdgeInsets.only(left: 20),
+                          child: ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: widget.destaquesModels?.trailers?.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    Container(
+                                      height: 200,
+                                      child: Image.network(
+                                        '${widget.destaquesModels?.images?.first.url}',
+                                        color: AppColors.darkGradientSecond
+                                            .withOpacity(0.7),
+                                        fit: BoxFit.cover,
+                                        colorBlendMode: BlendMode.modulate,
+                                      ),
+                                    ),
+                                    IconButton(
+                                      onPressed: () => controller.goTrailer(
+                                        widget.destaquesModels?.trailers?[index]
+                                            .url,
+                                      ),
+                                      icon: Icon(
+                                        Icons.play_arrow_outlined,
+                                        color: AppColors.red,
+                                        size: 30,
+                                      ),
+                                    )
+                                  ],
                                 ),
-                                Icon(
-                                  Icons.arrow_forward_ios_outlined,
-                                  color: AppColors.white,
-                                )
-                              ],
-                            ),
+                              );
+                            },
                           ),
-                        );
-                      },
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              )
+              widget.showTimes == null
+                  ? Container()
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: Text(
+                            'Cinemas com o filme em sessões',
+                            style: AppStyles.buttonText,
+                          ),
+                        ),
+                        Container(
+                          height: screen.height * .20,
+                          width: screen.width,
+                          margin: EdgeInsets.only(left: 20, bottom: 20),
+                          child: ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            scrollDirection: Axis.vertical,
+                            itemCount: widget.showTimes?.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Container(
+                                margin: EdgeInsets.only(bottom: 10, right: 20),
+                                height: screen.height * .06,
+                                decoration: BoxDecoration(
+                                  color: AppColors.darkGradientFirst,
+                                  border: Border(
+                                    bottom: BorderSide(
+                                      color: AppColors.red,
+                                      width: 1,
+                                    ),
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        '${widget.showTimes?[index].name}',
+                                        style: AppStyles.text,
+                                      ),
+                                      Icon(
+                                        Icons.arrow_forward_ios_outlined,
+                                        color: AppColors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    )
             ],
           ),
         ),
