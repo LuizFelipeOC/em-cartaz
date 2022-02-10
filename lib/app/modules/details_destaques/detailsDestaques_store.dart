@@ -19,7 +19,11 @@ abstract class _DetailsDestaquesStoreBase with Store {
   getDuration(int? duration) {
     final hour = duration! / 60;
 
-    final minutes = duration % 60;
+    dynamic minutes = duration % 60;
+
+    if (minutes < 10) {
+      minutes = "0" + minutes.toString();
+    }
 
     return movieHours = '${hour.floor()} : $minutes';
   }
