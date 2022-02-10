@@ -1,18 +1,18 @@
 import 'package:em_cartaz/app/core/themes/app_colors.dart';
-import 'package:em_cartaz/app/modules/home/models/destaques_models.dart';
+import 'package:em_cartaz/app/modules/home/models/cartaz_models.dart';
 import 'package:flutter/material.dart';
 
 class ClassificWidget extends StatelessWidget {
-  const ClassificWidget({Key? key, this.event}) : super(key: key);
+  const ClassificWidget({Key? key, this.contentRating}) : super(key: key);
 
-  final Event? event;
+  final String? contentRating;
 
   @override
   Widget build(BuildContext context) {
     var colors = Colors.transparent;
     var title = "";
 
-    switch (event?.contentRating) {
+    switch (contentRating) {
       case '12 anos':
         colors = Colors.yellowAccent.shade700;
         title = '12';
@@ -39,6 +39,8 @@ class ClassificWidget extends StatelessWidget {
         break;
 
       default:
+        colors = Colors.pinkAccent.shade700;
+        title = "VC";
     }
 
     return Padding(

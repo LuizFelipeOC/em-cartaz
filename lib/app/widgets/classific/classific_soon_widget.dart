@@ -1,11 +1,11 @@
 import 'package:em_cartaz/app/core/themes/app_colors.dart';
-import 'package:em_cartaz/app/modules/home/models/soon_models.dart';
+import 'package:em_cartaz/app/modules/home/models/cartaz_models.dart';
 import 'package:flutter/material.dart';
 
 class ClassificSoonWidget extends StatelessWidget {
   const ClassificSoonWidget({Key? key, this.event}) : super(key: key);
 
-  final SoonModels? event;
+  final MovieCartaz? event;
 
   @override
   Widget build(BuildContext context) {
