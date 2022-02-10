@@ -1,11 +1,13 @@
+import 'package:em_cartaz/app/modules/home/models/cartaz_models.dart';
+
 class DestaquesModels {
-  Event? event;
+  MovieCartaz? event;
   List<Showtimes>? showtimes;
 
   DestaquesModels({this.event, this.showtimes});
 
   DestaquesModels.fromJson(Map<String, dynamic> json) {
-    event = json['event'] != null ? Event.fromJson(json['event']) : null;
+    event = json['event'] != null ? MovieCartaz.fromJson(json['event']) : null;
     if (json['showtimes'] != null) {
       showtimes = <Showtimes>[];
       json['showtimes'].forEach((v) {
@@ -22,162 +24,6 @@ class DestaquesModels {
     if (showtimes != null) {
       data['showtimes'] = showtimes!.map((v) => v.toJson()).toList();
     }
-    return data;
-  }
-}
-
-class Event {
-  String? id;
-  String? title;
-  String? originalTitle;
-  String? movieIdUrl;
-  String? ancineId;
-  String? countryOrigin;
-  int? priority;
-  String? contentRating;
-  String? duration;
-  dynamic rating;
-  String? synopsis;
-  String? cast;
-  String? director;
-  String? distributor;
-  bool? inPreSale;
-  bool? isReexhibition;
-  String? urlKey;
-  bool? isPlaying;
-  int? countIsPlaying;
-  PremiereDate? premiereDate;
-  String? creationDate;
-  String? city;
-  String? siteURL;
-  String? nationalSiteURL;
-  List<Images>? images;
-  List<String>? genres;
-  List<String>? ratingDescriptors;
-  List<Trailers>? trailers;
-  String? boxOfficeId;
-  RottenTomatoe? rottenTomatoe;
-
-  Event(
-      {this.id,
-      this.title,
-      this.originalTitle,
-      this.movieIdUrl,
-      this.ancineId,
-      this.countryOrigin,
-      this.priority,
-      this.contentRating,
-      this.duration,
-      this.rating,
-      this.synopsis,
-      this.cast,
-      this.director,
-      this.distributor,
-      this.inPreSale,
-      this.isReexhibition,
-      this.urlKey,
-      this.isPlaying,
-      this.countIsPlaying,
-      this.premiereDate,
-      this.creationDate,
-      this.city,
-      this.siteURL,
-      this.nationalSiteURL,
-      this.images,
-      this.genres,
-      this.ratingDescriptors,
-      this.trailers,
-      this.boxOfficeId,
-      this.rottenTomatoe});
-
-  Event.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    title = json['title'];
-    originalTitle = json['originalTitle'];
-    movieIdUrl = json['movieIdUrl'];
-    ancineId = json['ancineId'];
-    countryOrigin = json['countryOrigin'];
-    priority = json['priority'];
-    contentRating = json['contentRating'];
-    duration = json['duration'];
-    rating = json['rating'];
-    synopsis = json['synopsis'];
-    cast = json['cast'];
-    director = json['director'];
-    distributor = json['distributor'];
-    inPreSale = json['inPreSale'];
-    isReexhibition = json['isReexhibition'];
-    urlKey = json['urlKey'];
-    isPlaying = json['isPlaying'];
-    countIsPlaying = json['countIsPlaying'];
-    premiereDate = json['premiereDate'] != null
-        ? PremiereDate.fromJson(json['premiereDate'])
-        : null;
-    creationDate = json['creationDate'];
-    city = json['city'];
-    siteURL = json['siteURL'];
-    nationalSiteURL = json['nationalSiteURL'];
-    if (json['images'] != null) {
-      images = <Images>[];
-      json['images'].forEach(
-        (v) {
-          images!.add(Images.fromJson(v));
-        },
-      );
-    }
-    if (json['trailers'] != null) {
-      trailers = <Trailers>[];
-      json['trailers'].forEach(
-        (v) {
-          trailers!.add(Trailers.fromJson(v));
-        },
-      );
-    }
-
-    genres = json['genres'].cast<String>();
-    ratingDescriptors = json['ratingDescriptors'].cast<String>();
-
-    boxOfficeId = json['boxOfficeId'];
-    rottenTomatoe = json['rottenTomatoe'] != null
-        ? RottenTomatoe.fromJson(json['rottenTomatoe'])
-        : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['title'] = title;
-    data['originalTitle'] = originalTitle;
-    data['movieIdUrl'] = movieIdUrl;
-    data['ancineId'] = ancineId;
-    data['countryOrigin'] = countryOrigin;
-    data['priority'] = priority;
-    data['contentRating'] = contentRating;
-    data['duration'] = duration;
-    data['rating'] = rating;
-    data['synopsis'] = synopsis;
-    data['cast'] = cast;
-    data['director'] = director;
-    data['distributor'] = distributor;
-    data['inPreSale'] = inPreSale;
-    data['isReexhibition'] = isReexhibition;
-    data['urlKey'] = urlKey;
-    data['isPlaying'] = isPlaying;
-    data['countIsPlaying'] = countIsPlaying;
-    if (premiereDate != null) {
-      data['premiereDate'] = premiereDate!.toJson();
-    }
-    data['creationDate'] = creationDate;
-    data['city'] = city;
-    data['siteURL'] = siteURL;
-    data['nationalSiteURL'] = nationalSiteURL;
-    if (images != null) {
-      data['images'] = images!.map((v) => v.toJson()).toList();
-    }
-    data['genres'] = genres;
-    data['ratingDescriptors'] = ratingDescriptors;
-    data['boxOfficeId'] = boxOfficeId;
-
     return data;
   }
 }
