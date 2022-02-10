@@ -4,8 +4,6 @@ import 'package:em_cartaz/app/core/themes/app_colors.dart';
 import 'package:em_cartaz/app/core/themes/app_styles.dart';
 import 'package:em_cartaz/app/modules/details_destaques/detailsDestaques_store.dart';
 import 'package:em_cartaz/app/modules/home/models/destaques_models.dart';
-import 'package:em_cartaz/app/widgets/classific/classific_widget.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
 
@@ -26,13 +24,6 @@ class DetailsDestaquesPageState
   @override
   Widget build(BuildContext context) {
     final screen = MediaQuery.of(context).size;
-
-    SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarBrightness: Brightness.dark,
-      ),
-    );
 
     controller
         .getDuration(int.parse(widget.destaquesModels?.event?.duration ?? "0"));
@@ -250,6 +241,60 @@ class DetailsDestaquesPageState
                                 ),
                               )
                             ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Text(
+                      'Cinemas com o filme em sessões',
+                      style: AppStyles.buttonText,
+                    ),
+                  ),
+                  Container(
+                    height: screen.height * .20,
+                    width: screen.width,
+                    margin: EdgeInsets.only(left: 20, bottom: 20),
+                    child: ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      itemCount: widget.destaquesModels?.showtimes?.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                          margin: EdgeInsets.only(bottom: 10, right: 20),
+                          height: screen.height * .06,
+                          decoration: BoxDecoration(
+                            color: AppColors.darkGradientFirst,
+                            border: Border(
+                              bottom: BorderSide(
+                                color: AppColors.red,
+                                width: 1,
+                              ),
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  '${widget.destaquesModels?.showtimes?[index].name}',
+                                  style: AppStyles.text,
+                                ),
+                                Icon(
+                                  Icons.arrow_forward_ios_outlined,
+                                  color: AppColors.white,
+                                )
+                              ],
+                            ),
                           ),
                         );
                       },
