@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:em_cartaz/app/modules/home/models/cartaz_models.dart';
 import 'package:em_cartaz/app/modules/home/models/city_models.dart';
 import 'package:em_cartaz/app/modules/home/models/destaques_models.dart';
-import 'package:em_cartaz/app/modules/home/models/soon_models.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -26,7 +25,7 @@ abstract class _HomeStoreBase with Store {
   List<MovieCartaz>? listCartaz;
 
   @observable
-  List<SoonModels>? listSoon;
+  List<MovieCartaz>? listSoon;
 
   @observable
   bool isLoading = false;
@@ -107,7 +106,7 @@ abstract class _HomeStoreBase with Store {
 
     List<dynamic> listaSoonMovies = soonMovies.data;
 
-    listSoon = listaSoonMovies.map((e) => SoonModels.fromJson(e)).toList();
+    listSoon = listaSoonMovies.map((e) => MovieCartaz.fromJson(e)).toList();
 
     isLoading = false;
   }
