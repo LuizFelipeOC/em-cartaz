@@ -106,7 +106,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                                                 .listDestques?[index].event,
                                           ),
                                           onTap: () => Modular.to.pushNamed(
-                                            '/home/details/destaques/',
+                                            '/home/details/',
                                             arguments: DestaquesModels(
                                               event: controller
                                                   .listDestques?[index].event,
@@ -162,7 +162,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                                                 controller.listCartaz?[index],
                                           ),
                                           onTap: () => Modular.to.pushNamed(
-                                            '/home/details/cartaz/',
+                                            '/home/details/generic/',
                                           ),
                                         ),
                                       );
