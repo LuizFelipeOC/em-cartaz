@@ -3,18 +3,15 @@
 import 'package:em_cartaz/app/core/themes/app_colors.dart';
 import 'package:em_cartaz/app/core/themes/app_styles.dart';
 import 'package:em_cartaz/app/modules/home/home_store.dart';
-import 'package:em_cartaz/app/modules/home/models/cartaz_models.dart';
-import 'package:em_cartaz/app/modules/home/models/destaques_models.dart';
-import 'package:em_cartaz/app/widgets/cards/card_cartaz_widget.dart';
-import 'package:em_cartaz/app/widgets/cards/card_soon_widget.dart';
 import 'package:em_cartaz/app/widgets/cards/card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class HomePage extends StatefulWidget {
-  final String title;
-  const HomePage({Key? key, this.title = "Home"}) : super(key: key);
+  const HomePage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -107,13 +104,12 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                                           ),
                                           onTap: () => Modular.to.pushNamed(
                                             '/home/details/',
-                                            arguments: DestaquesModels(
-                                              event: controller
+                                            arguments: [
+                                              controller
                                                   .listDestques?[index].event,
-                                              showtimes: controller
-                                                  .listDestques?[index]
-                                                  .showtimes,
-                                            ),
+                                              controller.listDestques?[index]
+                                                  .showtimes
+                                            ],
                                           ),
                                         ),
                                       );
@@ -153,7 +149,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                                       return Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: GestureDetector(
-                                          child: CardCartazWidget(
+                                          child: CardWidget(
                                             images: controller
                                                 .listCartaz?[index]
                                                 .images
@@ -162,7 +158,11 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                                                 controller.listCartaz?[index],
                                           ),
                                           onTap: () => Modular.to.pushNamed(
-                                            '/home/details/generic/',
+                                            '/home/details/',
+                                            arguments: [
+                                              controller.listCartaz?[index],
+                                              null
+                                            ],
                                           ),
                                         ),
                                       );
@@ -202,13 +202,17 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                                       return Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: GestureDetector(
-                                          child: CardSoonWidget(
+                                          child: CardWidget(
                                             images: controller
                                                 .listSoon?[index].images?.first,
                                             event: controller.listSoon?[index],
                                           ),
                                           onTap: () => Modular.to.pushNamed(
-                                            '/home/details/embreve/',
+                                            '/home/details/',
+                                            arguments: [
+                                              controller.listSoon?[index],
+                                              null
+                                            ],
                                           ),
                                         ),
                                       );
