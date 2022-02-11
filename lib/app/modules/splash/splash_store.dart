@@ -16,6 +16,6 @@ abstract class _SplashStoreBase with Store {
       return Modular.to.pushReplacementNamed('/initialConfig/');
     }
 
-    Modular.to.pushReplacementNamed('/home/');
+    Modular.to.pushReplacementNamed('/home/container/');
   }
 }

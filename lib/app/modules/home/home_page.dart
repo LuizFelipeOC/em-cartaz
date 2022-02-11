@@ -22,242 +22,176 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
   Widget build(BuildContext context) {
     final screen = MediaQuery.of(context).size;
 
-    return Scaffold(
-      backgroundColor: AppColors.darkGradientFirst,
-      appBar: AppBar(
-        backgroundColor: AppColors.darkGradientFirst,
-        elevation: 0,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Icon(
-                  Icons.movie_creation_outlined,
-                  color: AppColors.red,
-                  size: 36,
+    return SizedBox(
+      width: screen.width,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 20,
                 ),
-                SizedBox(width: 20),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.play_arrow_outlined,
+                      size: 30,
+                      color: AppColors.red,
+                    ),
+                    Text(
+                      'Em Cartaz',
+                      style: AppStyles.buttonText,
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
+                child: Text(
+                  'Em Destaques',
+                  style: AppStyles.buttonText,
+                ),
+              ),
+              SizedBox(
+                height: screen.height * .40,
+                child: Observer(
+                  builder: (_) {
+                    return controller.isLoading
+                        ? Container()
+                        : ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: controller.listDestques?.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: GestureDetector(
+                                  child: CardWidget(
+                                    images: controller.listDestques?[index]
+                                        .event?.images?.first,
+                                    event:
+                                        controller.listDestques?[index].event,
+                                  ),
+                                  onTap: () => Modular.to.pushNamed(
+                                    '/home/details/',
+                                    arguments: [
+                                      controller.listDestques?[index].event,
+                                      controller.listDestques?[index].showtimes
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                  },
+                ),
+              )
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 10,
+              top: 10,
+              bottom: 5,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
                 Text(
                   'Em Cartaz',
                   style: AppStyles.buttonText,
                 ),
+                SizedBox(
+                  height: screen.height * .40,
+                  child: Observer(
+                    builder: (_) {
+                      return controller.isLoading
+                          ? Container()
+                          : ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: controller.listCartaz?.length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: GestureDetector(
+                                    child: CardWidget(
+                                      images: controller
+                                          .listCartaz?[index].images?.first,
+                                      event: controller.listCartaz?[index],
+                                    ),
+                                    onTap: () => Modular.to.pushNamed(
+                                      '/home/details/',
+                                      arguments: [
+                                        controller.listCartaz?[index],
+                                        null
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                    },
+                  ),
+                )
               ],
             ),
-          ],
-        ),
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            end: Alignment.bottomRight,
-            colors: const [
-              AppColors.darkGradientFirst,
-              AppColors.darkGradientSecond,
-            ],
           ),
-        ),
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: SizedBox(
-            width: screen.width,
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 10,
+              top: 10,
+              bottom: 5,
+            ),
             child: Column(
-              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 30,
-                    top: 10,
-                    bottom: 10,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Em Destaques',
-                        style: AppStyles.buttonText,
-                      ),
-                      SizedBox(
-                        height: screen.height * .40,
-                        child: Observer(
-                          builder: (_) {
-                            return controller.isLoading
-                                ? Container()
-                                : ListView.builder(
-                                    physics: const BouncingScrollPhysics(),
-                                    itemCount: controller.listDestques?.length,
-                                    scrollDirection: Axis.horizontal,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: GestureDetector(
-                                          child: CardWidget(
-                                            images: controller
-                                                .listDestques?[index]
-                                                .event
-                                                ?.images
-                                                ?.first,
-                                            event: controller
-                                                .listDestques?[index].event,
-                                          ),
-                                          onTap: () => Modular.to.pushNamed(
-                                            '/home/details/',
-                                            arguments: [
-                                              controller
-                                                  .listDestques?[index].event,
-                                              controller.listDestques?[index]
-                                                  .showtimes
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  );
-                          },
-                        ),
-                      )
-                    ],
-                  ),
+                Text(
+                  'Em breve',
+                  style: AppStyles.buttonText,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 30,
-                    top: 10,
-                    bottom: 5,
+                SizedBox(
+                  height: screen.height * .40,
+                  child: Observer(
+                    builder: (_) {
+                      return controller.isLoading
+                          ? Container()
+                          : ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: controller.listSoon?.length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: GestureDetector(
+                                    child: CardWidget(
+                                      images: controller
+                                          .listSoon?[index].images?.first,
+                                      event: controller.listSoon?[index],
+                                    ),
+                                    onTap: () => Modular.to.pushNamed(
+                                      '/home/details/',
+                                      arguments: [
+                                        controller.listSoon?[index],
+                                        null
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                    },
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Em Cartaz',
-                        style: AppStyles.buttonText,
-                      ),
-                      SizedBox(
-                        height: screen.height * .40,
-                        child: Observer(
-                          builder: (_) {
-                            return controller.isLoading
-                                ? Container()
-                                : ListView.builder(
-                                    physics: const BouncingScrollPhysics(),
-                                    itemCount: controller.listCartaz?.length,
-                                    scrollDirection: Axis.horizontal,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: GestureDetector(
-                                          child: CardWidget(
-                                            images: controller
-                                                .listCartaz?[index]
-                                                .images
-                                                ?.first,
-                                            event:
-                                                controller.listCartaz?[index],
-                                          ),
-                                          onTap: () => Modular.to.pushNamed(
-                                            '/home/details/',
-                                            arguments: [
-                                              controller.listCartaz?[index],
-                                              null
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  );
-                          },
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 30,
-                    top: 10,
-                    bottom: 5,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Em breve',
-                        style: AppStyles.buttonText,
-                      ),
-                      SizedBox(
-                        height: screen.height * .40,
-                        child: Observer(
-                          builder: (_) {
-                            return controller.isLoading
-                                ? Container()
-                                : ListView.builder(
-                                    physics: const BouncingScrollPhysics(),
-                                    itemCount: controller.listSoon?.length,
-                                    scrollDirection: Axis.horizontal,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: GestureDetector(
-                                          child: CardWidget(
-                                            images: controller
-                                                .listSoon?[index].images?.first,
-                                            event: controller.listSoon?[index],
-                                          ),
-                                          onTap: () => Modular.to.pushNamed(
-                                            '/home/details/',
-                                            arguments: [
-                                              controller.listSoon?[index],
-                                              null
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  );
-                          },
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+                )
               ],
             ),
           ),
-        ),
+        ],
       ),
-      bottomNavigationBar: Observer(builder: (_) {
-        return BottomNavigationBar(
-          backgroundColor: AppColors.darkGradientSecond,
-          elevation: 10,
-          selectedItemColor: AppColors.white,
-          currentIndex: controller.index,
-          selectedLabelStyle: AppStyles.textAppbar,
-          unselectedLabelStyle: AppStyles.textAppbar,
-          onTap: (value) => controller.bottomBarController(value),
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.business,
-              ),
-              label: 'Shoppings',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-              ),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Configuração',
-            ),
-          ],
-        );
-      }),
     );
   }
 }

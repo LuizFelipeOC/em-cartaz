@@ -12,7 +12,7 @@ abstract class _DetailsDestaquesStoreBase with Store {
   String? movieHours;
 
   returnPage() async {
-    Modular.to.navigate('/home/');
+    Modular.to.pop();
   }
 
   @action
