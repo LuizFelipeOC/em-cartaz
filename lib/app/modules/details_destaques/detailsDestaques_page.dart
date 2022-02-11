@@ -263,11 +263,11 @@ class DetailsDestaquesPageState
                           ),
                         ),
                         Container(
-                          height: screen.height * .20,
+                          height: screen.height * .25,
                           width: screen.width,
                           margin: EdgeInsets.only(left: 20, bottom: 20),
                           child: ListView.builder(
-                            physics: const BouncingScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             scrollDirection: Axis.vertical,
                             itemCount: widget.showTimes?.length,
                             itemBuilder: (BuildContext context, int index) {
