@@ -19,9 +19,12 @@ abstract class _ContainerStoreBase with Store {
     Test(
       title: '2',
     ),
-    HomePage(),
+    const HomePage(),
     Test(
       title: '3',
+    ),
+    Test(
+      title: '4',
     ),
   ];
 }

@@ -6,6 +6,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:em_cartaz/app/modules/container/container_store.dart';
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class ContainerPage extends StatefulWidget {
   final String title;
@@ -36,52 +37,68 @@ class ContainerPageState extends ModularState<ContainerPage, ContainerStore> {
           ),
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
-            child: Container(
-              child: Column(
-                children: [
-                  Observer(
-                    builder: (_) {
-                      return Container(
-                        child: controller.listasPage[controller.index],
-                      );
-                    },
-                  ),
-                ],
-              ),
+            child: Column(
+              children: [
+                Observer(
+                  builder: (_) {
+                    return Container(
+                      child: controller.listasPage[controller.index],
+                    );
+                  },
+                ),
+              ],
             ),
           ),
         ),
       ),
-      bottomNavigationBar: Observer(
-        builder: (_) {
-          return BottomNavigationBar(
-            backgroundColor: AppColors.darkGradientSecond,
-            selectedItemColor: AppColors.white,
+      bottomNavigationBar: Observer(builder: (_) {
+        return Container(
+          height: screen.height * .07,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              end: Alignment.centerLeft,
+              begin: Alignment.centerRight,
+              colors: const [
+                AppColors.darkGradientFirst,
+                AppColors.darkGradientSecond,
+              ],
+            ),
+          ),
+          child: BottomNavigationBar(
+            onTap: (index) => controller.bottomBarController(index),
+            type: BottomNavigationBarType.fixed,
             currentIndex: controller.index,
-            selectedLabelStyle: AppStyles.textAppbar,
-            unselectedLabelStyle: AppStyles.textAppbar,
-            onTap: (value) => controller.bottomBarController(value),
-            items: const <BottomNavigationBarItem>[
+            iconSize: 20,
+            unselectedLabelStyle: AppStyles.text,
+            selectedLabelStyle: AppStyles.text,
+            selectedItemColor: AppColors.red,
+            unselectedItemColor: AppColors.white,
+            backgroundColor: Colors.transparent,
+            items: const [
               BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.business,
+                  Icons.business_outlined,
                 ),
-                label: 'Shoppings',
+                label: 'Cinemas',
               ),
               BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.home,
+                  Icons.home_filled,
                 ),
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
-                label: 'Configuração',
+                icon: Icon(Icons.star_border_purple500),
+                label: 'Favoritos',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.engineering),
+                label: 'Config',
               ),
             ],
-          );
-        },
-      ),
+          ),
+        );
+      }),
     );
   }
 }
