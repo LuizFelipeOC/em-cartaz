@@ -48,6 +48,7 @@ abstract class _HomeStoreBase with Store {
     cities = CityModels.fromJson(response.data);
 
     var idCidade = cities?.cities?.first.id;
+    prefs.setString('idcidade', idCidade.toString());
 
     var destaquesCidade = await dio.get(
       'https://api-content.ingresso.com/v0/templates/highlights/$idCidade?partnership=%22%22',
