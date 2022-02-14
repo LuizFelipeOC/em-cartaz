@@ -1,3 +1,4 @@
+import 'package:em_cartaz/app/modules/cines/cines_store.dart';
 import 'package:em_cartaz/app/modules/container/container_Page.dart';
 import 'package:em_cartaz/app/modules/container/container_store.dart';
 import 'package:em_cartaz/app/modules/home/home_store.dart';
@@ -8,6 +9,7 @@ class ContainerModule extends Module {
   final List<Bind> binds = [
     Bind.lazySingleton((i) => ContainerStore()),
     Bind((i) => HomeStore()),
+    Bind((i) => CinesStore()),
   ];
 
   @override
