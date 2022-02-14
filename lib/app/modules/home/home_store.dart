@@ -1,11 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:em_cartaz/app/modules/home/home_page.dart';
 import 'package:em_cartaz/app/modules/home/models/cartaz_models.dart';
 import 'package:em_cartaz/app/modules/home/models/city_models.dart';
 import 'package:em_cartaz/app/modules/home/models/destaques_models.dart';
 import 'package:em_cartaz/app/modules/home/teste.dart';
-import 'package:em_cartaz/app/modules/user_identification/userIdentification_page.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -127,16 +124,4 @@ abstract class _HomeStoreBase with Store {
       arguments: destaquesModels,
     );
   }
-
-  final listasPage = [
-    Test(
-      title: '2',
-    ),
-    Test(
-      title: '5',
-    ),
-    Test(
-      title: '3',
-    ),
-  ];
 }
