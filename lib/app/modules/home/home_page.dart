@@ -22,8 +22,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
   Widget build(BuildContext context) {
     final screen = MediaQuery.of(context).size;
 
-    return SizedBox(
-      width: screen.width,
+    return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,12 +38,12 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                   children: [
                     Icon(
                       Icons.play_arrow_outlined,
-                      size: 30,
+                      size: 40,
                       color: AppColors.red,
                     ),
                     Text(
                       'Em Cartaz',
-                      style: AppStyles.buttonText,
+                      style: AppStyles.titlePages,
                     ),
                   ],
                 ),
@@ -57,7 +56,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                 ),
               ),
               SizedBox(
-                height: screen.height * .40,
+                height: screen.height * .30,
                 child: Observer(
                   builder: (_) {
                     return controller.isLoading
@@ -106,7 +105,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                   style: AppStyles.buttonText,
                 ),
                 SizedBox(
-                  height: screen.height * .40,
+                  height: screen.height * .30,
                   child: Observer(
                     builder: (_) {
                       return controller.isLoading
@@ -155,7 +154,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                   style: AppStyles.buttonText,
                 ),
                 SizedBox(
-                  height: screen.height * .40,
+                  height: screen.height * .30,
                   child: Observer(
                     builder: (_) {
                       return controller.isLoading
