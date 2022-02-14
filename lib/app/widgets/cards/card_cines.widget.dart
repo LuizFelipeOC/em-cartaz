@@ -21,6 +21,7 @@ class CardCineWidget extends StatelessWidget {
         padding:
             const EdgeInsets.only(top: 20, right: 20, left: 20, bottom: 20),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,6 +35,14 @@ class CardCineWidget extends StatelessWidget {
                   style: AppStyles.text,
                 )
               ],
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.arrow_forward_ios_rounded,
+                color: AppColors.red,
+                size: 30,
+              ),
             ),
           ],
         ),
