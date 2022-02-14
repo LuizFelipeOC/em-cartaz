@@ -1,3 +1,4 @@
+import 'package:em_cartaz/app/modules/cines/cines_page.dart';
 import 'package:em_cartaz/app/modules/home/home_page.dart';
 import 'package:em_cartaz/app/modules/home/teste.dart';
 import 'package:mobx/mobx.dart';
@@ -16,9 +17,7 @@ abstract class _ContainerStoreBase with Store {
   }
 
   final listasPage = [
-    Test(
-      title: '2',
-    ),
+    const CinesPage(),
     const HomePage(),
     Test(
       title: '3',
