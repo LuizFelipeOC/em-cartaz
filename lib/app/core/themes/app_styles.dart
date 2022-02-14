@@ -15,6 +15,12 @@ class AppStyles {
     fontSize: 16,
   );
 
+  static final titlePages = GoogleFonts.poppins(
+    color: AppColors.white,
+    fontWeight: FontWeight.bold,
+    fontSize: 20,
+  );
+
   static final textAppBarHeading = GoogleFonts.poppins(
     color: AppColors.white,
     fontWeight: FontWeight.bold,
